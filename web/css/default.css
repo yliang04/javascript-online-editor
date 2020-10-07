@@ -1,0 +1,104 @@
+:root {
+    --text-color: #beb999;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+	overflow: hidden;
+    height: 100%;
+}
+
+h1 {
+    color: var(--text-color);
+}
+
+h3 {
+    color: var(--text-color);
+}
+
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.toolbar-container {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+}
+
+.top-left-toolbar {
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.top-right-toolbar {
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.bottom-toolbar {
+    display: flex;
+    height: 35px;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.header {
+    flex: 0 1 50px;
+}
+
+.footer {
+    flex: 0 0 40px;
+}
+
+.content {
+    flex: 0 1 auto;
+    overflow-y: scroll;
+}
+
+.title {
+    margin-left: 10px;
+}
+
+
+.button {
+    background-color: var(--text-color);
+    border: none;
+    color: white;
+    padding: 7px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.select {
+    color: var(--text-color);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.CodeMirror {
+    height: 100%;
+}
+
+.disabled {
+    display: none;
+}

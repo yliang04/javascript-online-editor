@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sample</title>
+  <link rel="stylesheet" href="plugins/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="plugins/codemirror/addon/lint/lint.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/3024-day.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/3024-night.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/abcdef.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/ambiance.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/base16-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/bespin.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/base16-light.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/blackboard.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/cobalt.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/colorforth.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/dracula.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/duotone-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/duotone-light.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/eclipse.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/elegant.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/erlang-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/gruvbox-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/hopscotch.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/icecoder.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/isotope.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/lesser-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/liquibyte.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/lucario.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/material.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/mbo.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/mdn-like.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/midnight.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/monokai.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/neat.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/neo.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/night.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/oceanic-next.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/panda-syntax.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/paraiso-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/paraiso-light.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/pastel-on-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/railscasts.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/rubyblue.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/seti.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/shadowfox.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/solarized.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/the-matrix.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/tomorrow-night-bright.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/tomorrow-night-eighties.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/ttcn.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/twilight.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/vibrant-ink.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/xq-dark.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/xq-light.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/yeti.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/idea.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/darcula.css">
+  <link rel="stylesheet" href="plugins/codemirror/theme/zenburn.css">
+  <link rel="stylesheet" href="css/default.css">
+  <script src="plugins/codemirror/lib/codemirror.js"></script>
+  <script src="plugins/codemirror/mode/javascript/javascript.js"></script>
+  <script src="plugins/codemirror/addon/lint/lint.js"></script>
+  <script src="plugins/codemirror/addon/lint/javascript-lint.js"></script>
+  <script src="plugins/codemirror/addon/selection/active-line.js"></script>
+  <script src="plugins/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="plugins/jshint/jshint.js"></script>
+</head>
+<body>
+<div class="box">
+  <div class="header">
+    <div class="title">
+    <h1>Example</h1>
+    <div>
+      <h3>This is a an example test script built for the Census dashboard</h3>
+    </div>
+    </div>
+    <hr>
+  </div>
+  <div class="content">
+        <textarea title="template" name="editor" id="code-editor">
+const dashboard = require('../../pages/dashboard.page');
+const tools = require('../../utilities/tools');
+
+describe('Census Dashboard', function() {
+   const CONNECTICUT_DATA_POINT = {x: 64, y: 79};
+
+   beforeEach(function() {
+      dashboard.getFromDirectURL('Examples/Census');
+      dashboard.waitForLoading(3000);
+      dashboard.closeNotification();
+   });
+
+   it('looks the same as expected', function() {
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_initialChart'))
+         .toEqual(0, 'Initial look and feel does not match baseline');
+      expect(tools.getElementScreenDiff(dashboard.viewerRoot, 'Census_initialDashboard'))
+         .toEqual(0, 'Chart\'s initial look and feel does not match baseline');
+   });
+
+   it('can maximize chart and then revert it back to original size', function() {
+      dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.SHOW_ENLARGED);
+      dashboard.waitForLoading(500);
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_maximizedChart'))
+         .toEqual(0, 'Maximized chart appearance does not match baseline');
+
+      dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.SHOW_ACTUAL_SIZE);
+      dashboard.waitForLoading(500);
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_initialChart'))
+         .toEqual(0, 'Maximized chart does not revert back to initial chart');
+   });
+
+   it('can show tooltip on chart correctly', function() {
+      dashboard.mouseOverChart('Chart', CONNECTICUT_DATA_POINT);
+      dashboard.waitForLoading(500);
+
+      expect(dashboard.chartToolTip.getText()).toContain('Population: ');
+      expect(dashboard.chartToolTip.getText()).toContain('Median Household Income: ');
+      expect(dashboard.chartToolTip.getText()).toContain('Property Value: ');
+      expect(dashboard.chartToolTip.getText()).toContain('Poverty Rate: ');
+      expect(dashboard.chartToolTip.getText()).toContain('Home Owner Rate: ');
+      expect(tools.getElementScreenDiff(dashboard.chartToolTip, 'Census_dataPointToolTip'))
+         .toEqual(0, 'DataPointToolTip appearance does not match baseline');
+   });
+
+   it('can reflect change after a Region selection is made', function() {
+      dashboard.makeSelectionOnList('Region', 'Midwest');
+      dashboard.waitForLoading(1000);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_regionFilteredChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+      expect(dashboard.getSelectionListItems('State').count()).toEqual(12);
+      expect(dashboard.getText('Population')).toContain('64.39M');
+      expect(dashboard.getText('Income number')).toContain('43.49K');
+      expect(dashboard.getText('Poverty Number')).toContain('10.3%');
+   });
+
+   it('can reflect change after a State selection is made', function() {
+      dashboard.makeSelectionOnList('State', 'Connecticut');
+      dashboard.waitForLoading(500);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_stateFilteredChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+      expect(dashboard.getSelectionListItems('Region').count()).toEqual(1);
+      expect(dashboard.getText('Population')).toContain('3.41M');
+      expect(dashboard.getText('Income number')).toContain('56.41K');
+      expect(dashboard.getText('Poverty Number')).toContain('8.0%');
+   });
+
+   it('can reflect change after a Year selection is made', function() {
+      dashboard.makeSelectionOnList('SelectionList1', '2012');
+      dashboard.waitForLoading(500);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_filteredChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+      expect(dashboard.getText('Population')).toContain('283.96M');
+      expect(dashboard.getText('Income number')).toContain('43.34K');
+      expect(dashboard.getText('Poverty Number')).toContain('11.9%');
+   });
+
+   it('can reflect change after moving household income range slider', function() {
+      let originalNumber = dashboard.getText('Income number').then(function(text) {
+         return tools.getNumeric(text);
+      });
+
+      dashboard.moveRangeSliderHandle('Income', 'left').toLeft(50);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_incomeRangeFilteredChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+
+      dashboard.getText('Income number').then(function(text) {
+         expect(tools.getNumeric(text)).toBeGreaterThan(originalNumber);
+      });
+   });
+
+   it('can reflect change after moving poverty rate range slider', function() {
+      let originalNumber = dashboard.getText('Poverty Number').then(function(text) {
+         return tools.getNumeric(text);
+      });
+
+      dashboard.moveRangeSliderHandle('Poverty', 'right').toRight(50);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_povertyRangeFilteredChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+
+      dashboard.getText('Poverty Number').then(function(text) {
+         expect(tools.getNumeric(text)).toBeLessThan(originalNumber);
+      });
+   });
+
+   it('can reflect change on chart after filled by different value', function() {
+      dashboard.makeSelectionOnComboBox('SizeCB', 'Land Area');
+      dashboard.waitForLoading(500);
+
+      expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_filledByLandAreaChart'))
+         .toEqual(0, 'Filtered chart appearance does not match baseline');
+   });
+
+   describe('after a data point on the chart is clicked', function() {
+      beforeEach(function() {
+         //click the data point that is closest to the top toLeft corner of the chart
+         dashboard.clickOnChart('Chart', CONNECTICUT_DATA_POINT);
+         dashboard.resetMousePosition();
+
+         //prepare highlighted chart screenshots if it's not already created
+         tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_highlightedChart');
+      });
+
+      it('can have brush on the point, and clear brush', function() {
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.BRUSH);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_brushedChart'))
+            .toEqual(0, 'Brushed chart appearance does not match baseline');
+
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.CLEAR_BRUSH);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_highlightedChart'))
+            .toEqual(0, 'Clearing brushed chart does not revert back to initial highlighted chart');
+      });
+
+      it('can have brush on a point on chart, and clear brushed point if it\'s excluded by filter', function() {
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.BRUSH);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_brushedChart'))
+            .toEqual(0, 'Brushed chart appearance does not match baseline');
+
+         dashboard.makeSelectionOnList('Region', 'Midwest');
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_filteredBrushedChart'))
+            .toEqual(0, 'Filter brushed chart appearance does not match baseline');
+      });
+
+      it('can do zoom in and zoom out on chart', function() {
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.ZOOM_CHART);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_zoomedChart'))
+            .toEqual(0, 'Zoomed chart appearance does not match baseline');
+
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.CLEAR_ZOOM);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_initialChart'))
+            .toEqual(0, 'Zoomed chart does not revert back to initial chart');
+      });
+
+      it('can exclude a data point, and clear the zoom(exclusion)', function() {
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.EXCLUDE_DATA);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_dataExcludedChart'))
+            .toEqual(0, 'Excluding data point on chart does not match expected');
+
+         dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.CLEAR_ZOOM);
+         dashboard.waitForLoading(500);
+         expect(tools.getElementScreenDiff(dashboard.getChartPlotArea('Chart'), 'Census_initialChart'))
+            .toEqual(0, 'Clearing excluded data point does not revert chart back to initial chart');
+      });
+   });
+
+   it('can filter on different filters and clear filter', function() {
+      dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.SHOW_SUMMARY);
+      expect(dashboard.slideOut.isPresent()).toBeTruthy('Slide out does not come up');
+
+      dashboard.closeSlideOut();
+      expect(dashboard.slideOut.isPresent()).toBeFalsy('slide out cannot be closed');
+      dashboard.makeSelectionOnList('Region', 'South');
+      dashboard.makeSelectionOnList('State', 'Florida');
+      dashboard.makeSelectionOnList('State', 'Louisiana');
+      dashboard.waitForLoading(2000);
+
+      dashboard.makeSelectionOnComboBox('SizeCB', 'Travel Time');
+      dashboard.resetMousePosition();
+      dashboard.waitForLoading(1000);
+
+      expect(tools.getElementScreenDiff(dashboard.viewerRoot, 'Census_filteredDashboard1'))
+         .toBe(0, 'Filtered Dashboard does not match baseline');
+
+      //clear filter
+      dashboard.clickToolbarButtonOnComponent('Region', dashboard.toolbarBtn.UNSELECT);
+      dashboard.clickToolbarButtonOnComponent('State', dashboard.toolbarBtn.UNSELECT);
+      dashboard.makeSelectionOnComboBox('SizeCB', 'Property Value');
+      dashboard.resetMousePosition();
+      dashboard.waitForLoading(1000);
+
+      expect(tools.getElementScreenDiff(dashboard.viewerRoot, 'Census_initialDashboard'))
+         .toBe(0,'Dashboard does not revert back to initial after clearing filter');
+   });
+
+   //TODO ad-hoc example test
+   it('can ad-hoc edit chart', function() {
+      dashboard.clickToolbarButtonOnComponent('Chart', dashboard.toolbarBtn.EDIT);
+      dashboard.waitForLoading(1000);
+   });
+});
+        </textarea>
+    <!--javascript -->
+    <script>
+       let theme = location.hash.slice(1);
+
+       console.log("*********" + theme);
+
+       let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+          lineNumbers: true,
+          mode: "javascript",
+          gutters: ["CodeMirror-lint-markers"],
+          lint: {esversion: 6},
+          theme: theme? theme : "neat",
+          styleActiveLine: true,
+          readOnly: true
+       });
+    </script>
+  </div>
+  <div class="footer">
+    <hr>
+  </div>
+</div>
+</body>
+</html>

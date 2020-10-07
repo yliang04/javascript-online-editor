@@ -1,0 +1,7 @@
+com\yiyang\editor\EditorApp.class
+com\yiyang\editor\resource\HelloWorldResource.class
+com\yiyang\editor\resource\RunTestResource.class
+com\yiyang\editor\resource\DownloadResource.class
+com\yiyang\editor\resource\LoadFileResource.class
+com\yiyang\editor\resource\SaveTemplateResource.class
+com\yiyang\editor\errorMapper\IOExceptionMapper.class

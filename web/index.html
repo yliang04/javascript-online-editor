@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spec Editor</title>
+    <link rel="stylesheet" href="plugins/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="plugins/codemirror/addon/lint/lint.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/3024-day.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/3024-night.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/abcdef.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/ambiance.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/base16-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/bespin.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/base16-light.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/blackboard.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/colorforth.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/duotone-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/duotone-light.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/elegant.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/erlang-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/gruvbox-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/hopscotch.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/icecoder.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/isotope.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/lesser-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/liquibyte.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/lucario.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/material.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/mbo.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/mdn-like.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/midnight.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/monokai.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/neat.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/neo.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/night.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/oceanic-next.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/panda-syntax.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/paraiso-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/paraiso-light.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/pastel-on-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/railscasts.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/seti.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/shadowfox.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/solarized.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/the-matrix.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/tomorrow-night-bright.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/tomorrow-night-eighties.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/ttcn.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/vibrant-ink.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/xq-dark.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/xq-light.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/yeti.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/idea.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/darcula.css">
+    <link rel="stylesheet" href="plugins/codemirror/theme/zenburn.css">
+    <link rel="stylesheet" href="css/default.css">
+    <script src="plugins/codemirror/lib/codemirror.js"></script>
+    <script src="plugins/codemirror/mode/javascript/javascript.js"></script>
+    <script src="plugins/codemirror/addon/lint/lint.js"></script>
+    <script src="plugins/codemirror/addon/lint/javascript-lint.js"></script>
+    <script src="plugins/codemirror/addon/selection/active-line.js"></script>
+    <script src="plugins/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="plugins/jshint/jshint.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="javascript/default.js"></script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="header">
+        <div class="title">
+          <h1>Test Spec Editor</h1>
+        </div>
+        <div class="toolbar-container">
+          <div class="top-left-toolbar">
+            <div>
+              <a class="button" href="../test/jsdoc/out/index.html" target="_blank" title="Test API">API</a>
+            </div>
+            <div>
+              <a class="button" href="../test/readme/output/TUTORIAL.html" target="_blank" title="How to write a test">Tutorial</a>
+            </div>
+            <div>
+              <a id="exampleButton" class="button" href="./example.html" target="_blank" title="Sample test spec">Example</a>
+            </div>
+            <div class="disabled">
+              <a class="button" href="./guide/HOW-TO.html" target="_blank" title="Editor Usage Guide">Guide</a>
+            </div>
+          </div>
+          <div class="top-right-toolbar disabled">
+            <div>
+              <form name="2" action="rest/file/save" method="post" id="submitForm">
+                <button class="button" type="submit" title="Save your spec to server">Save to Server</button>
+              </form>
+            </div>
+            <div>
+              <a class="button" href="http://192.168.4.142:8080/job/Run%20Test%20Spec/" target="_blank" title="Access to Jenkins">Test Runner</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="content">
+        <textarea title="template" name="editor" id="code-editor">
+const dashboard = require('../../pages/dashboard.page');
+const tools = require('../../utilities/tools');
+
+/**
+ * @description Describe the object to be tested. In our use cases, they will be the name of the dashboard.
+ *
+ */
+describe('The name of your test object(dashboard)', function() {
+   /**
+    * The beforeEach function is being run before each of the 'it' test case.
+    * All initialization for the test cases will go into this function.
+    */
+   beforeEach(function () {
+      /**********************************************************************
+       * The default browser window size is 1200x1000
+       * If you want to customize the window size in this test, uncomment the
+       * following line
+       ***********************************************************************/
+      //browser.driver.manage().window().setSize(1200, 1000);
+
+      dashboard.getFromDirectURL('relative path to your dashboard');
+      dashboard.waitForLoading(3000);
+      dashboard.closeNotification();
+   });
+
+   /**
+    * Test case. Put your test cases into here
+    */
+   it('a description on your test case', function() {
+
+   });
+
+});
+
+        </textarea>
+      </div>
+      <div class="footer">
+        <hr>
+        <div class="bottom-toolbar">
+            <div class="select">Select a theme: <select id='themeSelect'>
+            <option selected>default</option>
+            <option>3024-day</option>
+            <option>3024-night</option>
+            <option>abcdef</option>
+            <option>ambiance</option>
+            <option>base16-dark</option>
+            <option>base16-light</option>
+            <option>bespin</option>
+            <option>blackboard</option>
+            <option>cobalt</option>
+            <option>colorforth</option>
+            <option>darcula</option>
+            <option>dracula</option>
+            <option>duotone-dark</option>
+            <option>duotone-light</option>
+            <option>eclipse</option>
+            <option>elegant</option>
+            <option>erlang-dark</option>
+            <option>gruvbox-dark</option>
+            <option>hopscotch</option>
+            <option>icecoder</option>
+            <option>idea</option>
+            <option>isotope</option>
+            <option>lesser-dark</option>
+            <option>liquibyte</option>
+            <option>lucario</option>
+            <option>material</option>
+            <option>mbo</option>
+            <option>mdn-like</option>
+            <option>midnight</option>
+            <option>monokai</option>
+            <option>neat</option>
+            <option>neo</option>
+            <option>night</option>
+            <option>oceanic-next</option>
+            <option>panda-syntax</option>
+            <option>paraiso-dark</option>
+            <option>paraiso-light</option>
+            <option>pastel-on-dark</option>
+            <option>railscasts</option>
+            <option>rubyblue</option>
+            <option>seti</option>
+            <option>shadowfox</option>
+            <option>solarized dark</option>
+            <option>solarized light</option>
+            <option>the-matrix</option>
+            <option>tomorrow-night-bright</option>
+            <option>tomorrow-night-eighties</option>
+            <option>ttcn</option>
+            <option>twilight</option>
+            <option>vibrant-ink</option>
+            <option>xq-dark</option>
+            <option>xq-light</option>
+            <option>yeti</option>
+            <option>zenburn</option>
+            </select></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
